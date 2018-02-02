@@ -68,7 +68,9 @@ def exit_phonebook():
     print "Bye."
 
 def main():
-    """ Command Pattern YaY! """
+    """Function provides entry point into program utilizes the
+       Command Pattern YaY! It uses this to take the place of a switch
+       statement to direct flow of application."""
     options = {
         1: look_up_entry,
         2: set_entry,
