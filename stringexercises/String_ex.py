@@ -3,15 +3,11 @@
 str = "hello nick"
 print str.upper()
 
-
 print str.lower()
-
 
 print str.capitalize()
 
-
 print ''.join(reversed(str))
-
 
 def leetspeak(str):
     leet_str = ""
