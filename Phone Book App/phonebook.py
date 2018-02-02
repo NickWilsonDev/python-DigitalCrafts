@@ -7,6 +7,8 @@ https://softwareengineering.stackexchange.com/questions/182093/why-store-a-funct
 entries = {}
 
 def display_menu():
+    """Function simply prints out the menu of options for the user.
+    """
     print ""
     print "Electronic Phone Book"
     print "====================="
@@ -18,23 +20,32 @@ def display_menu():
     print "What do you want to do (1-5)?"
 
 def look_up_entry():
+    """Function checks the entries dictionary to check if a particular
+       entry exists, if so then that data is displayed to the user.
+    """
     if any(entries):
         name = raw_input("Name: ")
         if name in entries:
-            print "Found entry for %s: %s" % (name, number)
+            print "Found entry for %s: %s" % (name, entries[name])
         else:
             print "No entry found for %s." % name
     else:
         print "The contact list is empty."
 
 def set_entry():
-    name   = raw_input("Name: ")
+    """Function creates an entry into the entries dictionary, prompting the
+       user for the name and number data.
+    """
+    name = raw_input("Name: ")
     number = raw_input("Phone Number: ")
     entries[name] = number
     print "Entry stored for %s." % name
 
 def del_entry():
-    name   = raw_input("Name: ")
+    """Function deletes the specified entry from the dictionary if it
+       exists.
+    """
+    name = raw_input("Name: ")
     if name in entries:
         del entries[name]
         print "Deleted entry for %s." % name
@@ -42,13 +53,18 @@ def del_entry():
         print "No entry found for %s." % name
 
 def list_entries():
+    """Function displays all data from the dictionary.
+    """
     if any(entries):
         for name in entries:
             print "Found entry for %s: %s" % (name, entries[name])
     else:
         print "The contact list is empty!"
 
-def exit():
+def exit_phonebook():
+    """Function prints 'Bye.', simply needed to work with my command
+       pattern.
+    """
     print "Bye."
 
 def main():
@@ -58,7 +74,7 @@ def main():
         2: set_entry,
         3: del_entry,
         4: list_entries,
-        5: exit
+        5: exit_phonebook
     }
 
     choice = 0
@@ -68,4 +84,3 @@ def main():
         options[choice]()
 
 main()
-
