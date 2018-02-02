@@ -5,3 +5,4 @@
 These directories and files contain several python excercises
 for practicing fundamental aspects of python
 
+added some stuff
