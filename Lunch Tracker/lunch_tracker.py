@@ -8,6 +8,16 @@ restaurant_choices = {
     "Ru San's": 0
 }
 
+weekday = {
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday"
+}
+
+day_number = 0
+
 def clear_screen():
     #print(chr(27) + "[2J")
     print("\033c")
@@ -22,8 +32,9 @@ def print_main_menu():
     print "1. Choose a Restaurant"
     print "2. Manage Restaurants"
     print "3. Clear Screen"
-
     print "0. Exit"
+
+    print restaurant_choices
 
 def add_restaurant():
     new_restaurant = raw_input("Name: ")
@@ -40,14 +51,36 @@ def remove_restaurant():
         sleep(1)
 
 def choose_restaurant():
+    global day_number
+    day_number = (day_number + 1) % 5
+    if day_number == 0:
+        day_number = 1
     print "*********************"
     print "* Choose Restaurant *"
     print "*********************"
+    print "Today is %s, where would you like to eat?" % weekday[day_number]
+    sub_menu = {}
+
     i = 1
     for key in restaurant_choices:
         print "%d. %s" % (i, key)
+        sub_menu[i] = key
         i += 1
-    sleep(2)
+    
+    try:
+        choice = int(raw_input())
+    except ValueError:
+        print "Please choose from the selected."
+        sleep(1)
+    if choice not in sub_menu:
+        print "Please choose from the selected."
+        sleep(1)
+    else:
+        if restaurant_choices[sub_menu[choice]] < 3:
+            restaurant_choices[sub_menu[choice]] += 1
+        else:
+            print "Sorry, You have already chosen that restaurant 3 times."
+            sleep(2)
 
 def manage_restaurants():
     print "Manage Restaurants"
