@@ -58,6 +58,22 @@ def list_entries():
     if any(entries):
         for name in entries:
             print "Found entry for %s: %s" % (name, entries[name])
+        sort = raw_input("Would you like to sort entries?(y/n) ")
+        if sort == 'y':
+            sort_key = raw_input("(Name|Number)" )
+            entry_list = []
+            for key, value in entries.items():
+                entry_list.append([key, value])
+            if sort_key == "Name":
+                entry_list = sorted(entry_list, key=lambda x: x[0])
+                for entry in entry_list:
+                    print "%s :: %s" %(entry[0], entry[1])
+            elif sort_key == "Number":
+                entry_list = sorted(entry_list, key=lambda x: x[1])
+                for entry in entry_list:
+                    print "%s :: %s" %(entry[0], entry[1])
+            else:
+                pass
     else:
         print "The contact list is empty!"
 
