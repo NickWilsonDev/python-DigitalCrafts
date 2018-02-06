@@ -5,6 +5,7 @@ got the idea for the quasi switch structure(command pattern) with a dict from th
 https://softwareengineering.stackexchange.com/questions/182093/why-store-a-function-inside-a-python-dictionary
 """
 from Contact import Contact
+import pickle
 
 entries = []
 
@@ -18,8 +19,10 @@ def display_menu():
     print "2. Set an entry"
     print "3. Delete an entry"
     print "4. List all entries"
-    print "5. Quit"
-    print "What do you want to do (1-5)?"
+    print "5. Save entries to disk"
+    print "6. Restore entries to disk"
+    print "7. Exit"
+    print "What do you want to do (1-7)?"
 
 def look_up_entry():
     """Function checks the entries dictionary to check if a particular
@@ -93,6 +96,19 @@ def exit_phonebook():
     """
     print "Bye."
 
+def save_entries():
+    # open the file in write mode (w)
+    myfile = open('phonebook.pickle', 'w')
+    # dump the contents of the phonebook list into file
+    pickle.dump(entries, myfile)
+    myfile.close()
+
+def restore_entries():
+    """ quick check to see if there is a file w+ """
+    myfile = open('phonebook.pickle', 'r')
+    global entries
+    entries = pickle.load(myfile)
+
 def main():
     """Function provides entry point into program utilizes the
        Command Pattern YaY! It uses this to take the place of a switch
@@ -102,11 +118,13 @@ def main():
         2: set_entry,
         3: del_entry,
         4: list_entries,
-        5: exit_phonebook
+        5: save_entries,
+        6: restore_entries,
+        7: exit_phonebook
     }
 
     choice = 0
-    while choice != 5:
+    while choice != 7:
         display_menu()
         choice = int(raw_input())
         options[choice]()
